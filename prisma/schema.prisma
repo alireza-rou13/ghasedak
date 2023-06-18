@@ -15,7 +15,10 @@ model User {
   username String  @unique
   fullname String?
   hash     String?
-  Books    Book[]
+  books    Book[]
+  role     Role    @default(BASIC)
+  city     City    @relation(fields: [cityId], references: [id])
+  cityId   String
 }
 
 model Book {
@@ -35,4 +38,24 @@ model Book {
   updated_at DateTime @updatedAt
 
   @@map("booking")
+}
+
+model BookingLocation {
+  id     String @id @default(uuid())
+  title  String @unique
+  city   City   @relation(fields: [cityId], references: [id])
+  cityId String
+}
+
+model City {
+  id              String            @id @default(uuid())
+  title           String            @unique
+  BookingLocation BookingLocation[]
+  User            User[]
+}
+
+enum Role {
+  BASIC
+  ISFBOOK
+  ADMIN
 }
