@@ -15,8 +15,8 @@ export class CityController {
   }
 
   @Get()
-  findAll() {
-    return this.cityService.findAll();
+  async findAll() {
+    return await this.cityService.findAll();
   }
 
   @Get(':id')
@@ -29,8 +29,8 @@ export class CityController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCityDto: UpdateCityDto) {
-    return this.cityService.update(+id, updateCityDto);
+  async update(@Param('id') id: string, @Body() updateCityDto: UpdateCityDto) {
+    return await this.cityService.update(id, updateCityDto);
   }
 
   @Delete(':id')

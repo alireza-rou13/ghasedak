@@ -16,7 +16,7 @@ export class CityService {
     
   }
 
-  findAll() {
+  async findAll() {
     return this.prisma.city.findMany();
   }
 
@@ -24,8 +24,12 @@ export class CityService {
     return this.prisma.city.findUnique({where: { id }})
   }
 
-  update(id: number, updateCityDto: UpdateCityDto) {
-    return `This action updates a #${id} city`;
+  async update(id: string, updateCityDto: UpdateCityDto) {
+    try { return await this.prisma.city.update({ where: { id } , data: updateCityDto}) }
+    catch (error) {
+      console.log(error);
+      return new BadRequestException();
+     }
   }
 
   remove(id: number) {
