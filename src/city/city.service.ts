@@ -32,7 +32,11 @@ export class CityService {
      }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} city`;
+  async remove(id: string) {
+    try { return await this.prisma.city.delete({ where: { id } }) }
+    catch (error) {
+      console.log(error);
+      return new BadRequestException();
+     }
   }
 }

@@ -35,6 +35,6 @@ export class CityController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.cityService.remove(+id);
+    return this.cityService.remove(id);
   }
 }
