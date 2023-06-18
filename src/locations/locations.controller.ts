@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
 import { LocationsService } from './locations.service';
 import { CreateLocationDto } from './dto/create-location.dto';
 import { UpdateLocationDto } from './dto/update-location.dto';
@@ -18,8 +18,14 @@ export class LocationsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.locationsService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const location = await this.locationsService.findOne(id);
+    
+    if(!location){
+      return new NotFoundException(`location with id ${id} not found`);
+    }
+    
+    return location
   }
 
   @Patch(':id')
