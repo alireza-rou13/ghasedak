@@ -17,8 +17,8 @@ model User {
   hash     String?
   books    Book[]
   role     Role    @default(BASIC)
-  city     City    @relation(fields: [cityId], references: [id])
-  cityId   String
+  city     City?   @relation(fields: [cityId], references: [id])
+  cityId   String?
 }
 
 model Book {
