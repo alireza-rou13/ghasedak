@@ -2,8 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } 
 import { LocationsService } from './locations.service';
 import { CreateLocationDto } from './dto/create-location.dto';
 import { UpdateLocationDto } from './dto/update-location.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('locations')
+@ApiTags("Booking Locations")
 export class LocationsController {
   constructor(private readonly locationsService: LocationsService) {}
 
