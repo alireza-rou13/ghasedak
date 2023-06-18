@@ -45,6 +45,7 @@ model BookingLocation {
   title  String @unique
   city   City   @relation(fields: [cityId], references: [id])
   cityId String
+  order  Int    @default(0)
 }
 
 model City {
