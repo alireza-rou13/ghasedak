@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateCityDto } from './dto/create-city.dto';
 import { UpdateCityDto } from './dto/update-city.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -8,14 +8,7 @@ export class CityService {
   constructor(private prisma: PrismaService) {}
 
   async create(createCityDto: CreateCityDto) {
-    try {
-      return await this.prisma.city.create({ data: createCityDto });
-    } catch (error) {
-      console.log(error);
-      return new BadRequestException(
-        `name ${createCityDto.title} is already created`,
-      );
-    }
+    return await this.prisma.city.create({ data: createCityDto})
   }
 
   async findAll() {
@@ -27,23 +20,13 @@ export class CityService {
   }
 
   async update(id: string, updateCityDto: UpdateCityDto) {
-    try {
-      return await this.prisma.city.update({
-        where: { id },
-        data: updateCityDto,
-      });
-    } catch (error) {
-      console.log(error);
-      return new BadRequestException();
-    }
+    return await this.prisma.city.update({
+      where: { id },
+      data: updateCityDto,
+    });
   }
 
   async remove(id: string) {
-    try {
-      return await this.prisma.city.delete({ where: { id } });
-    } catch (error) {
-      console.log(error);
-      return new BadRequestException();
-    }
+    return await this.prisma.city.delete({ where: { id } });
   }
 }
