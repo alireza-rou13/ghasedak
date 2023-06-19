@@ -8,7 +8,9 @@ export class BookingLocationService {
   constructor(private prisma: PrismaService) {}
 
   async create(createBookingLocationDto: CreateBookingLocationDto) {
-    return await this.prisma.bookingLocation.create({data:createBookingLocationDto})
+    return await this.prisma.bookingLocation.create({
+      data: createBookingLocationDto,
+    });
   }
 
   findAll() {
@@ -16,18 +18,22 @@ export class BookingLocationService {
   }
 
   async findOne(id: string) {
-    return await this.prisma.bookingLocation.findUnique({where:{id}})
+    return await this.prisma.bookingLocation.findUnique({ where: { id } });
   }
 
   async update(id: string, updateBookingLocationDto: UpdateBookingLocationDto) {
-    return await this.prisma.bookingLocation.update({where:{id},data: updateBookingLocationDto})
+    return await this.prisma.bookingLocation.update({
+      where: { id },
+      data: updateBookingLocationDto,
+    });
   }
 
   async remove(id: string) {
-    try { return await this.prisma.bookingLocation.delete({ where: { id } }) }
-    catch (error) {
+    try {
+      return await this.prisma.bookingLocation.delete({ where: { id } });
+    } catch (error) {
       console.log(error);
       return new BadRequestException();
-     }
+    }
   }
 }

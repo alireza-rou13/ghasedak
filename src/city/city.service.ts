@@ -6,14 +6,16 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class CityService {
   constructor(private prisma: PrismaService) {}
-  
+
   async create(createCityDto: CreateCityDto) {
-    try { return await this.prisma.city.create({data:createCityDto})}
-    catch (error) { 
-      console.log(error)
-      return new BadRequestException(`name ${createCityDto.title} is already created`)
+    try {
+      return await this.prisma.city.create({ data: createCityDto });
+    } catch (error) {
+      console.log(error);
+      return new BadRequestException(
+        `name ${createCityDto.title} is already created`,
+      );
     }
-    
   }
 
   async findAll() {
@@ -21,22 +23,27 @@ export class CityService {
   }
 
   async findOne(id: string) {
-    return this.prisma.city.findUnique({where: { id }})
+    return this.prisma.city.findUnique({ where: { id } });
   }
 
   async update(id: string, updateCityDto: UpdateCityDto) {
-    try { return await this.prisma.city.update({ where: { id } , data: updateCityDto}) }
-    catch (error) {
+    try {
+      return await this.prisma.city.update({
+        where: { id },
+        data: updateCityDto,
+      });
+    } catch (error) {
       console.log(error);
       return new BadRequestException();
-     }
+    }
   }
 
   async remove(id: string) {
-    try { return await this.prisma.city.delete({ where: { id } }) }
-    catch (error) {
+    try {
+      return await this.prisma.city.delete({ where: { id } });
+    } catch (error) {
       console.log(error);
       return new BadRequestException();
-     }
+    }
   }
 }

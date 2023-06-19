@@ -1,12 +1,16 @@
-import { ApiProperty } from "@nestjs/swagger"
+import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional, IsString } from 'class-validator';
 
 export class CreateBookingLocationDto {
-    @ApiProperty()
-    title: string
-    
-    @ApiProperty()
-    cityId: string
-    
-    @ApiProperty()
-    order?: number
+  @IsString()
+  @ApiProperty()
+  title: string;
+
+  @IsString()
+  @ApiProperty()
+  cityId: string;
+
+  @IsOptional()
+  @ApiProperty()
+  order?: number;
 }

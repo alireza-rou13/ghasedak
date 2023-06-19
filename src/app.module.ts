@@ -8,7 +8,13 @@ import { CityModule } from './city/city.module';
 import { BookingLocationModule } from './bookinglocation/bookinglocation.module';
 
 @Module({
-  imports: [PrismaModule, BookingModule, UsersModule, CityModule, BookingLocationModule],
+  imports: [
+    PrismaModule,
+    BookingModule,
+    UsersModule,
+    CityModule,
+    BookingLocationModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
