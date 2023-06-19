@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { BookingLocationService } from './bookinglocation.service';
@@ -34,14 +35,14 @@ export class BookingLocationController {
 
   @Get(':id')
   @ApiCreatedResponse({ type: BookingLocationEntity })
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id',ParseUUIDPipe) id: string) {
     return this.bookinglocationService.findOne(id);
   }
 
   @Patch(':id')
   @ApiCreatedResponse({ type: BookingLocationEntity })
   update(
-    @Param('id') id: string,
+    @Param('id',ParseUUIDPipe) id: string,
     @Body() updateBookingLocationDto: UpdateBookingLocationDto,
   ) {
     return this.bookinglocationService.update(id, updateBookingLocationDto);
@@ -49,7 +50,7 @@ export class BookingLocationController {
 
   @Delete(':id')
   @ApiCreatedResponse({ type: BookingLocationEntity })
-  remove(@Param('id') id: string) {
+  remove(@Param('id',ParseUUIDPipe) id: string) {
     return this.bookinglocationService.remove(id);
   }
 }
