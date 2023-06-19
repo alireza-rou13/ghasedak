@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   NotFoundException,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { CityService } from './city.service';
 import { CreateCityDto } from './dto/create-city.dto';
@@ -33,7 +34,7 @@ export class CityController {
 
   @Get(':id')
   @ApiCreatedResponse({ type: CityEntity })
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id',ParseUUIDPipe) id: string) {
     const city = await this.cityService.findOne(id);
     if (!city) {
       return new NotFoundException(`city with id ${id} not found`);
@@ -43,13 +44,13 @@ export class CityController {
 
   @Patch(':id')
   @ApiCreatedResponse({ type: CityEntity })
-  async update(@Param('id') id: string, @Body() updateCityDto: UpdateCityDto) {
+  async update(@Param('id',ParseUUIDPipe) id: string, @Body() updateCityDto: UpdateCityDto) {
     return await this.cityService.update(id, updateCityDto);
   }
 
   @Delete(':id')
   @ApiCreatedResponse({ type: CityEntity })
-  remove(@Param('id') id: string) {
+  remove(@Param('id',ParseUUIDPipe) id: string) {
     return this.cityService.remove(id);
   }
 }
