@@ -13,7 +13,6 @@ import { CreateCityDto } from './dto/create-city.dto';
 import { UpdateCityDto } from './dto/update-city.dto';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { CityEntity } from './entities/city.entity';
-import { isArray } from 'util';
 
 @Controller('city')
 @ApiTags('City')
