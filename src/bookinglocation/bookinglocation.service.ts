@@ -13,8 +13,8 @@ export class BookingLocationService {
     });
   }
 
-  findAll() {
-    return this.prisma.bookingLocation.findMany();
+  async findAll() {
+    return await this.prisma.bookingLocation.findMany();
   }
 
   async findOne(id: string) {
@@ -29,11 +29,6 @@ export class BookingLocationService {
   }
 
   async remove(id: string) {
-    try {
-      return await this.prisma.bookingLocation.delete({ where: { id } });
-    } catch (error) {
-      console.log(error);
-      return new BadRequestException();
-    }
+    return await this.prisma.bookingLocation.delete({ where: { id } });
   }
 }
