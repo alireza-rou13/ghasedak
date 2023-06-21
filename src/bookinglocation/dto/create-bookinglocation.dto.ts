@@ -13,7 +13,6 @@ export class CreateBookingLocationDto {
   @ApiProperty()
   title: string;
 
-  @IsString()
   @IsUUID()
   @ApiProperty()
   cityId: string;
