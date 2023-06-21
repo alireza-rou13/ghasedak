@@ -6,10 +6,17 @@ import { PrismaClientExceptionFilter } from 'nestjs-prisma';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
+  
+  // use ClassValidator and Transformers
   app.useGlobalPipes(new ValidationPipe({
       whitelist: true,
   }));
+  
+  //error handling
+  const { httpAdapter } = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
+
+  //Swagger documentation to app
   const config = new DocumentBuilder()
     .setTitle('Ghasedak')
     .setDescription('The Ghasedak API')
@@ -17,9 +24,6 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-
-  const { httpAdapter } = app.get(HttpAdapterHost);
-  app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
 
   await app.listen(3000);
 }
