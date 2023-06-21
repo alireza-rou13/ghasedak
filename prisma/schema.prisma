@@ -55,6 +55,14 @@ model City {
   User            User[]
 }
 
+model Setting {
+  id      String  @id @default(uuid())
+  title   String  @unique
+  key     String  @unique
+  status  Boolean @default(false)
+  options Json?
+}
+
 enum Role {
   BASIC
   ISFBOOK
