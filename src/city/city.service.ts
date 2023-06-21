@@ -8,7 +8,7 @@ export class CityService {
   constructor(private prisma: PrismaService) {}
 
   async create(createCityDto: CreateCityDto) {
-    return await this.prisma.city.create({ data: createCityDto})
+    return await this.prisma.city.create({ data: createCityDto });
   }
 
   async findAll() {

@@ -35,14 +35,14 @@ export class BookingLocationController {
 
   @Get(':id')
   @ApiCreatedResponse({ type: BookingLocationEntity })
-  findOne(@Param('id',ParseUUIDPipe) id: string) {
+  findOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.bookinglocationService.findOne(id);
   }
 
   @Patch(':id')
   @ApiCreatedResponse({ type: BookingLocationEntity })
   update(
-    @Param('id',ParseUUIDPipe) id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updateBookingLocationDto: UpdateBookingLocationDto,
   ) {
     return this.bookinglocationService.update(id, updateBookingLocationDto);
@@ -50,7 +50,7 @@ export class BookingLocationController {
 
   @Delete(':id')
   @ApiCreatedResponse({ type: BookingLocationEntity })
-  remove(@Param('id',ParseUUIDPipe) id: string) {
+  remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.bookinglocationService.remove(id);
   }
 }
