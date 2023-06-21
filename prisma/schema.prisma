@@ -19,6 +19,7 @@ model User {
   role     Role    @default(BASIC)
   city     City?   @relation(fields: [cityId], references: [id])
   cityId   String?
+  data     Json?
 }
 
 model Book {
