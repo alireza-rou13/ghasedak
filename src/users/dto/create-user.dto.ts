@@ -1,31 +1,28 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Prisma } from "@prisma/client";
-import { IsOptional, IsString, MinLength } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { Prisma } from '@prisma/client';
+import { IsOptional, IsString, MinLength } from 'class-validator';
 
 export class CreateUserDto {
   @ApiProperty()
   @IsString()
   @MinLength(3)
-  username: string
+  username: string;
 
   @ApiProperty()
   @IsString()
   @IsOptional()
   @MinLength(3)
-  fullname?: string
+  fullname?: string;
 
   @ApiProperty()
   @IsString()
   @IsOptional()
   @MinLength(3)
-  hash?: string
+  hash?: string;
 
   @ApiProperty()
   @IsString()
   @IsOptional()
   @MinLength(2)
-  data?: Prisma.InputJsonObject
-
-
-
+  data?: Prisma.InputJsonObject;
 }
