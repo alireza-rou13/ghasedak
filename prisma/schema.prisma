@@ -20,6 +20,7 @@ model User {
   city     City?   @relation(fields: [cityId], references: [id])
   cityId   String?
   data     Json?
+  status   Boolean @default(true)
 }
 
 model Book {
