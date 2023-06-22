@@ -1,7 +1,8 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
+import { SignupDto } from './dto/signup.dto';
 
 @Controller('auth')
 @ApiTags('Authentication')
@@ -12,5 +13,11 @@ export class AuthController {
   // @ApiCreatedResponse
   async signin(@Body() loginDto: LoginDto){
     return await this.authService.login(loginDto);
+  }
+
+  @Post('signup')
+  // @ApiCreatedResponse
+  async signup(@Body() signupDto: SignupDto){
+    return await this.authService.signup(signupDto);
   }
 }
