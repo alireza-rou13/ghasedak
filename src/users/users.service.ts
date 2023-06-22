@@ -12,8 +12,8 @@ export class UsersService {
     return this.prisma.user.create({data:createUserDto})
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll() {
+    return this.prisma.user.findMany();
   }
 
   findOne(id: number) {
