@@ -50,4 +50,27 @@ export class AuthService {
     //Return User is created
     return { msg: 'user created' };
   }
+  
+  //Login With Active Directory
+  async loginAD(loginDto: LoginDto) {
+    //check if username exists in baseDN
+    //throw error if not found
+    //compare password
+    //throw error if password not equal
+    // if (!pwmatches) throw new ForbiddenException('Credentials Incorrect');
+    //check if user exists in Ghasedak
+    //create user
+    //send back to user
+    // const payload = { sub: user.id, username: user.username };
+    // const secret = this.config.get('JWT_SECRET');
+    //return Token
+    // return {
+    //   access_token: await this.jwtService.signAsync(payload, {
+    //     expiresIn: '240m',
+    //     secret: secret,
+    //   }),
+    // };
+    return 'to do'
+  }
+  
 }
