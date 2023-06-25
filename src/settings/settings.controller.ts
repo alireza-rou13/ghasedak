@@ -33,8 +33,8 @@ export class SettingsController {
   }
 
   @Get(':key')
-  async findKey(@Param('key') id: string) {
-    return await this.settingsService.findKey(id);
+  async findKey(@Param('key') key: string) {
+    return await this.settingsService.findKey(key);
   }
 
   @Patch(':id')
@@ -44,6 +44,6 @@ export class SettingsController {
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    return await this.settingsService.remove(+id);
+    return await this.settingsService.remove(id);
   }
 }
