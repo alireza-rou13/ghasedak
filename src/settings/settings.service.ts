@@ -23,10 +23,15 @@ export class SettingsService {
   }
 
   async update(id: string, updateSettingDto: UpdateSettingDto) {
-    return `This action updates a #${id} setting`;
+    return this.prisma.setting.update({
+      where: { id },
+      data: updateSettingDto,
+    });
   }
 
   async remove(id: string) {
-    return `This action removes a #${id} setting`;
+    //check if user id have access  
+    //todo
+    return this.prisma.user.delete({ where: { id } });
   }
 }
