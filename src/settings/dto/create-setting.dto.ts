@@ -18,14 +18,11 @@ export class CreateSettingDto {
   key: string
 
   @ApiProperty()
-  @IsString()
   @IsOptional()
   @MinLength(2)
   status:boolean
 
   @ApiProperty()
-  @IsString()
   @IsOptional()
-  @MinLength(2)
   options: Prisma.JsonValue;
 }
