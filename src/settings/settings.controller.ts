@@ -29,12 +29,17 @@ export class SettingsController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return await this.settingsService.findOne(+id);
+    return await this.settingsService.findOne(id);
+  }
+
+  @Get(':key')
+  async findKey(@Param('key') id: string) {
+    return await this.settingsService.findKey(id);
   }
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateSettingDto: UpdateSettingDto) {
-    return await this.settingsService.update(+id, updateSettingDto);
+    return await this.settingsService.update(id, updateSettingDto);
   }
 
   @Delete(':id')
