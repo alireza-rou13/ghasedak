@@ -11,18 +11,22 @@ export class SettingsService {
   }
 
   async findAll() {
-    return `This action returns all settings`;
+    return this.prisma.setting.findMany();
   }
 
-  async findOne(id: number) {
-    return `This action returns a #${id} setting`;
+  async findKey(key: string) {
+    return this.prisma.setting.findUnique({ where: { key } });
   }
 
-  async update(id: number, updateSettingDto: UpdateSettingDto) {
+  async findOne(id: string) {
+    return this.prisma.setting.findUnique({ where: { id } });
+  }
+
+  async update(id: string, updateSettingDto: UpdateSettingDto) {
     return `This action updates a #${id} setting`;
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     return `This action removes a #${id} setting`;
   }
 }
