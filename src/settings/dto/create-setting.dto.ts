@@ -1,12 +1,16 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Prisma } from "@prisma/client";
-import { IsOptional, IsString, MinLength } from "class-validator";
+import { IsOptional, IsString, IsUUID, MinLength } from "class-validator";
 
 export class CreateSettingDto {
   @ApiProperty()
   @IsString()
   @MinLength(2)
   title: string;
+  
+  @ApiProperty()
+  @IsUUID()
+  userId: string;
 
   @ApiProperty()
   @IsString()
