@@ -18,5 +18,4 @@ export class LoginEntity implements User {
   data: Prisma.JsonValue;
   @ApiProperty()
   status: boolean;
-
 }

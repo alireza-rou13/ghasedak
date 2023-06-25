@@ -50,7 +50,7 @@ export class AuthService {
     //Return User is created
     return { msg: 'user created' };
   }
-  
+
   //Login With Active Directory
   async loginAD(loginDto: LoginDto) {
     //check if username exists in baseDN
@@ -70,7 +70,6 @@ export class AuthService {
     //     secret: secret,
     //   }),
     // };
-    return 'to do'
+    return 'to do';
   }
-  
 }

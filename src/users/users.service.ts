@@ -9,7 +9,7 @@ export type User = any;
 export class UsersService {
   constructor(private prisma: PrismaService) {}
   async create(createUserDto: CreateUserDto) {
-    return this.prisma.user.create({data:createUserDto})
+    return this.prisma.user.create({ data: createUserDto });
   }
 
   async findAll() {
