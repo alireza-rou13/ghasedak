@@ -15,7 +15,7 @@ export class SettingsService {
   }
 
   async findKey(key: string) {
-    return this.prisma.setting.findUnique({ where: { key } });
+    return this.prisma.setting.findUnique({ where: { key:key } });
   }
 
   async findOne(id: string) {
