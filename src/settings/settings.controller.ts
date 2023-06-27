@@ -32,7 +32,7 @@ export class SettingsController {
     return await this.settingsService.findOne(id);
   }
 
-  @Get(':key')
+  @Get('key/:key')
   async findKey(@Param('key') key: string) {
     return await this.settingsService.findKey(key);
   }
