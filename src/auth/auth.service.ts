@@ -66,30 +66,40 @@ export class AuthService {
       password: loginDto.password,
     };
     //check if username exists in baseDN
-    // console.log(url.options['url']);
 
     const username = loginDto.username;
     const password = loginDto.password;
 
     const auth = await ad_login(config, username, password);
     if (!auth) {
-      throw new ForbiddenException('Credentials Incorrect')
+      throw new ForbiddenException('Credentials Incorrect');
     }
     // const exists = await this.prisma.user.findUnique('')
     //check if user exists in Ghasedak
+    let user = await this.prisma.user.findUnique({ where: { username } });
+    if (!user) {
+      //create user
+      const hash = await argon.hash(loginDto.password);
+      const data = await ldap_find(config, username);
+      user = await this.prisma.user.create({
+        data: {
+          username,
+          hash,
+          data: JSON.stringify(data),
+        },
+      });
+    }
 
-
-    //create user
-    //send back to user
-    // const payload = { sub: user.id, username: user.username };
-    // const secret = this.config.get('JWT_SECRET');
+    // send back to user
+    const payload = { sub: user.id, username: user.username };
+    const secret = this.config.get('JWT_SECRET');
     //return Token
-    // return {
-    //   access_token: await this.jwtService.signAsync(payload, {
-    //     expiresIn: '240m',
-    //     secret: secret,
-    //   }),
-    // };
+    return {
+      access_token: await this.jwtService.signAsync(payload, {
+        expiresIn: '240m',
+        secret: secret,
+      }),
+    };
   }
 }
 //Login with Active Directory
@@ -106,6 +116,22 @@ async function ad_login(config, username, password) {
       } else {
         console.log('Authentication failed: incorrect username or password');
         reject(new ForbiddenException('Credentials Incorrect'));
+      }
+    });
+  });
+}
+//find user and return user data from ldap server
+async function ldap_find(config, username) {
+  const ad = new ActiveDirectory(config);
+  return new Promise((resolve, reject) => {
+    ad.findUser(username, (err, user) => {
+      if (err) {
+        reject(new ForbiddenException('Credentials Incorrect'));
+      }
+      if (!user) {
+        reject(new ForbiddenException('Credentials Incorrect'));
+      } else {
+        resolve(user);
       }
     });
   });
