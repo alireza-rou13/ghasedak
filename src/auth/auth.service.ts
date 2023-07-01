@@ -108,13 +108,13 @@ async function ad_login(config, username, password) {
   return new Promise((resolve, reject) => {
     ad.authenticate(username, password, (err, auth) => {
       if (err) {
-        console.log('Authentication failed:', err);
+        // console.log('Authentication failed:', err);
         reject(new ForbiddenException('Credentials Incorrect'));
       } else if (auth) {
-        console.log('Authentication successful');
+        // console.log('Authentication successful');
         resolve('Authentication successful');
       } else {
-        console.log('Authentication failed: incorrect username or password');
+        // console.log('Authentication failed: incorrect username or password');
         reject(new ForbiddenException('Credentials Incorrect'));
       }
     });
