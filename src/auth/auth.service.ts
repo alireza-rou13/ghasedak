@@ -6,7 +6,6 @@ import ActiveDirectory = require('activedirectory2');
 import { PrismaService } from 'src/prisma/prisma.service';
 import { LoginDto } from './dto/login.dto';
 import { SignupDto } from './dto/signup.dto';
-import { use } from 'passport';
 
 @Injectable()
 export class AuthService {
