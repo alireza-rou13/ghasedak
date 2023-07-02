@@ -32,7 +32,9 @@ model Book {
   startDate   DateTime
   endDate     DateTime
   type        String
-  location    String
+
+  bookingLocationId String
+  location          BookingLocation @relation(fields: [bookingLocationId], references: [id])
 
   author   User   @relation(fields: [authorId], references: [id])
   authorId String
@@ -49,6 +51,7 @@ model BookingLocation {
   city   City   @relation(fields: [cityId], references: [id])
   cityId String
   order  Int    @default(0)
+  Book   Book[]
 }
 
 model City {
