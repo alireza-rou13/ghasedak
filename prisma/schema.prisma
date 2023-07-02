@@ -36,8 +36,10 @@ model Book {
   bookingLocationId String
   location          BookingLocation @relation(fields: [bookingLocationId], references: [id])
 
-  author   User   @relation(fields: [authorId], references: [id])
-  authorId String
+  createdBy   User   @relation(fields: [createdById], references: [id])
+  createdById String
+
+  updatedById String
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
