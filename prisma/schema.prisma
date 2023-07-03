@@ -25,13 +25,13 @@ model User {
 }
 
 model Book {
-  id          String   @id @default(uuid())
+  id          String        @id @default(uuid())
   title       String
   description String?
-  status      String
+  status      BookingStatus @default(WAITING)
   startDate   DateTime
   endDate     DateTime
-  type        String
+  type        BookingType
 
   bookingLocationId String
   location          BookingLocation @relation(fields: [bookingLocationId], references: [id])
@@ -80,4 +80,17 @@ enum Role {
   BASIC
   ISFBOOK
   ADMIN
+}
+
+enum BookingStatus {
+  WAITING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+enum BookingType {
+  VIRTUAL
+  PRESENCE
+  HYBRID
 }
