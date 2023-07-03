@@ -39,7 +39,7 @@ model Book {
   createdBy   User   @relation(fields: [createdById], references: [id])
   createdById String
 
-  updatedById String
+  updatedById String?
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
