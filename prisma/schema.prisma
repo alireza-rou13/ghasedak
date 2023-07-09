@@ -23,7 +23,6 @@ model User {
   status   Boolean   @default(true)
   Settings Setting[]
   Contacts Contact[]
-  Phones   Phone[]
 }
 
 model Book {
@@ -79,20 +78,11 @@ model Setting {
 }
 
 model Contact {
-  id     String  @id @default(uuid())
+  id     String @id @default(uuid())
   name   String
-  user   User    @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
   userId String
-  Phone  Phone[]
-}
-
-model Phone {
-  id        String  @id @default(uuid())
-  number    Int
-  contact   Contact @relation(fields: [contactId], references: [id])
-  contactId String
-  user      User    @relation(fields: [userId], references: [id])
-  userId    String
+  number Int
 }
 
 enum Role {
