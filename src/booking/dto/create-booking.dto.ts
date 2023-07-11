@@ -1,5 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { BookingType } from '@prisma/client';
 import {
+  IsEnum,
+  IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
@@ -20,4 +23,17 @@ export class CreateBookingDto {
   @IsNumber()
   @ApiProperty()
   startDate: number;
+
+  @IsNumber()
+  @ApiProperty()
+  endDate: number;
+
+  @IsNotEmpty()
+  @IsEnum(BookingType)
+  type: BookingType;
+
+  @IsNotEmpty()
+  @IsUUID()
+  bookingLocationId: string;
+
 }
