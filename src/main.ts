@@ -23,6 +23,7 @@ async function bootstrap() {
     .setTitle('Ghasedak')
     .setDescription('The Ghasedak API')
     .setVersion('0.1')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
