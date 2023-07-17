@@ -11,10 +11,11 @@ import {
 import { User, UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtGuard } from 'src/auth/guard';
 import { GetUser } from 'src/auth/decorator';
 
+@ApiBearerAuth()
 @UseGuards(JwtGuard)
 @Controller('users')
 @ApiTags('Users')
@@ -45,8 +46,11 @@ export class UsersController {
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
   }
+
   @Get('me')
   getMe(@GetUser() user: User) {
-    return user;
+    console.log('me');
+    console.log(user);
+    return 'user';
   }
 }
