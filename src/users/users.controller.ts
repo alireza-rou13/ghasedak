@@ -22,6 +22,13 @@ import { GetUser } from 'src/auth/decorator';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @Get('me')
+  getMe(@GetUser() user: User) {
+    console.log('me');
+    console.log(user);
+    return user;
+  }
+
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
@@ -45,12 +52,5 @@ export class UsersController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
-  }
-
-  @Get('me')
-  getMe(@GetUser() user: User) {
-    console.log('me');
-    console.log(user);
-    return 'user';
   }
 }
