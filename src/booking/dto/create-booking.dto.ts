@@ -35,5 +35,4 @@ export class CreateBookingDto {
   @IsNotEmpty()
   @IsUUID()
   bookingLocationId: string;
-
 }

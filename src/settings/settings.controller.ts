@@ -38,7 +38,10 @@ export class SettingsController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateSettingDto: UpdateSettingDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateSettingDto: UpdateSettingDto,
+  ) {
     return await this.settingsService.update(id, updateSettingDto);
   }
 

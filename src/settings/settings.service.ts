@@ -7,7 +7,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class SettingsService {
   constructor(private prisma: PrismaService) {}
   async create(createSettingDto: CreateSettingDto) {
-    return this.prisma.setting.create({data: createSettingDto})
+    return this.prisma.setting.create({ data: createSettingDto });
   }
 
   async findAll() {
@@ -15,7 +15,7 @@ export class SettingsService {
   }
 
   async findKey(key: string) {
-    return this.prisma.setting.findUnique({ where: { key:key } });
+    return this.prisma.setting.findUnique({ where: { key: key } });
   }
 
   async findOne(id: string) {
@@ -30,7 +30,7 @@ export class SettingsService {
   }
 
   async remove(id: string) {
-    //check if user id have access  
+    //check if user id have access
     //todo
     return this.prisma.user.delete({ where: { id } });
   }
