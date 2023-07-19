@@ -15,7 +15,6 @@ model User {
   username String    @unique
   fullname String?
   hash     String?
-  books    Book[]
   role     Role      @default(BASIC)
   city     City?     @relation(fields: [cityId], references: [id])
   cityId   String?
@@ -23,16 +22,17 @@ model User {
   status   Boolean   @default(true)
   Settings Setting[]
   Contacts Contact[]
+  Booking  Booking[]
 }
 
-model Book {
+model Booking {
   id          String        @id @default(uuid())
   title       String
   description String?
   status      BookingStatus @default(WAITING)
   startDate   DateTime
   endDate     DateTime
-  type        BookingType
+  type        BookingType   @default(HYBRID)
 
   bookingLocationId String
   location          BookingLocation @relation(fields: [bookingLocationId], references: [id])
@@ -44,17 +44,15 @@ model Book {
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-
-  @@map("booking")
 }
 
 model BookingLocation {
-  id     String @id @default(uuid())
-  title  String @unique
-  city   City   @relation(fields: [cityId], references: [id])
-  cityId String
-  order  Int    @default(0)
-  Book   Book[]
+  id      String    @id @default(uuid())
+  title   String    @unique
+  city    City      @relation(fields: [cityId], references: [id])
+  cityId  String
+  order   Int       @default(0)
+  Booking Booking[]
 }
 
 model City {
