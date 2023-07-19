@@ -24,8 +24,15 @@ export class BooksService {
     return `This action returns a #${id} book`;
   }
 
-  update(id: number, updateBookDto: UpdateBookDto) {
-    return `This action updates a #${id} book`;
+  update(id: string, updateBookDto: UpdateBookDto) {
+    return this.prisma.booking.update({
+      where: { id },
+      data: {
+        ...updateBookDto,
+        startDate: new Date(updateBookDto.startDate),
+        endDate: new Date(updateBookDto.endDate),
+      },
+    });
   }
 
   remove(id: number) {
